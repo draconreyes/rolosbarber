@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="card" style="max-width: 500px; margin: 50px auto;">
+    <h2>Register</h2>
+    
+    <div *ngIf="success" style="color: green; margin-bottom: 15px;">
+      Registration successful! Redirecting to login...
+    </div>
+    
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username *</label>
+        <input 
+          type="text" 
+          id="username" 
+          [(ngModel)]="formData.username" 
+          name="username" 
+          required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input 
+          type="email" 
+          id="email" 
+          [(ngModel)]="formData.email" 
+          name="email" 
+          required>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password *</label>
+        <input 
+          type="password" 
+          id="password" 
+          [(ngModel)]="formData.password" 
+          name="password" 
+          required>
+      </div>
+      
+      <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input 
+          type="text" 
+          id="first_name" 
+          [(ngModel)]="formData.first_name" 
+          name="first_name">
+      </div>
+      
+      <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input 
+          type="text" 
+          id="last_name" 
+          [(ngModel)]="formData.last_name" 
+          name="last_name">
+      </div>
+      
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input 
+          type="tel" 
+          id="phone" 
+          [(ngModel)]="formData.phone" 
+          name="phone">
+      </div>
+      
+      <div class="error" *ngIf="error">{{ error }}</div>
+      
+      <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    
+    <p style="margin-top: 20px;">
+      Already have an account? <a routerLink="/login">Login</a>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div class="container">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2>{{ isAdmin ? 'All Appointments' : 'My Appointments' }}</h2>
+    <div>
+      <button *ngIf="!isAdmin" (click)="createAppointment()" class="btn btn-primary" style="margin-right: 10px;">
+        New Appointment
+      </button>
+      <button (click)="logout()" class="btn" style="background-color: #dc3545; color: white;">
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="appointments.length === 0" class="card">
+    <p>No appointments found.</p>
+  </div>
+
+  <div *ngFor="let appointment of appointments" class="card">
+    <div style="display: flex; justify-content: space-between;">
+      <div>
+        <h3>{{ appointment.service | titlecase }}</h3>
+        <p><strong>Date:</strong> {{ appointment.appointment_date }}</p>
+        <p><strong>Time:</strong> {{ appointment.appointment_time }}</p>
+        <p><strong>Status:</strong> 
+          <span [style.color]="appointment.status === 'confirmed' ? 'green' : appointment.status === 'canceled' ? 'red' : 'orange'">
+            {{ appointment.status | titlecase }}
+          </span>
+        </p>
+        <p *ngIf="isAdmin && appointment.client_details">
+          <strong>Client:</strong> {{ appointment.client_details.username }}
+        </p>
+        <p *ngIf="appointment.notes"><strong>Notes:</strong> {{ appointment.notes }}</p>
+      </div>
+      <div *ngIf="!isAdmin && appointment.status !== 'canceled'" style="display: flex; align-items: start;">
+        <button 
+          (click)="cancelAppointment(appointment)" 
+          class="btn" 
+          style="background-color: #dc3545; color: white;">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
